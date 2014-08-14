@@ -1,5 +1,6 @@
 #!/bin/bash -ex
 
+#若没有安装rbenv则安装，并完成环境变量的设置
 if [ ! -d ~/.rbenv ]; then
     sudo apt-get -y install build-essential libreadline-dev libssl-dev zlib1g-dev git-core
     git clone https://github.com/sstephenson/rbenv.git ~/.rbenv
@@ -7,11 +8,18 @@ if [ ! -d ~/.rbenv ]; then
     echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.profile
     echo 'eval "$(rbenv init -)"' >> ~/.profile
 fi
+
+#使环境变量生效
 source ~/.profile
+
+#检测ruby版本，安装1.9.3-p484
 if ! (rbenv versions | grep -q 1.9.3-p484); then
     rbenv install 1.9.3-p484
 fi
+
+#为本地应用指定ruby版本
 rbenv local 1.9.3-p484
 
+#安装bundler
 gem install bundler --no-rdoc --no-ri
 rbenv rehash
