@@ -18,12 +18,16 @@ source ~/.profile
 #执行clone_nise_bosh.sh脚本，获取nise bosh 源文件
 ./scripts/clone_nise_bosh.sh
 
-#执行clone_cf_release.sh脚本，获取
+#执行clone_cf_release.sh脚本，获取cf release源文件
 ./scripts/clone_cf_release.sh
 
+#执行install_environemnt.sh，设置相关环境变量
 ./scripts/install_environemnt.sh
+
+#执行install_cf_release.sh，开始cf的安装过程
 ./scripts/install_cf_release.sh
 
+#关闭shell debug模式，输出安装结果
 set +x
 echo "Done!"
 echo "You can launch Cloud Foundry with './scripts/start.sh'"
