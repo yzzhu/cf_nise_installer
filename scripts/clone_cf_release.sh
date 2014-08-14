@@ -1,5 +1,8 @@
 #!/bin/bash -ex
 
+#cf release作为一个submodule挂在cf_nise_installer的github项目中，
+#clone_cf_release.sh这个脚本用于获取cf release的源文件
+
 CF_RELEASE_USE_HEAD=${CF_RELEASE_USE_HEAD:-no}
 
 ruby_version=`rbenv version | cut -f1 -d" "` # to overwrite .ruby-version
@@ -14,7 +17,7 @@ if [ ! "$(ls -A cf-release)" ]; then
 
     (
         cd cf-release
-
+        #判断是否设置了分支版本
         if [ -n "${CF_RELEASE_BRANCH}" ]; then
             git checkout -f ${CF_RELEASE_BRANCH}
         fi
