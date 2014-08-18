@@ -8,6 +8,7 @@ CF_RELEASE_USE_HEAD=${CF_RELEASE_USE_HEAD:-no}
 ruby_version=`rbenv version | cut -f1 -d" "` # to overwrite .ruby-version
 
 if [ ! "$(ls -A cf-release)" ]; then
+    # 根据是否设置了CF_RELEASE_URL来完成不同的动作，可直接在脚本开始处设置变量或者设置系环境变量达到改变执行流程的目的
     if [ -z "${CF_RELEASE_URL}" ]; then
         git submodule update --init cf-release
     else
@@ -23,6 +24,7 @@ if [ ! "$(ls -A cf-release)" ]; then
         fi
 
         if [ $CF_RELEASE_USE_HEAD != "no" ]; then
+        #通过设置CF_RELEASE_USE_HEAD=yes,可以使安装的为最新版本的cf
             # required to compile a gem native extension of CCNG
             sudo apt-get -y install git-core libmysqlclient-dev libpq-dev libsqlite3-dev libxml2-dev libxslt-dev
             gem install rake -v 0.9.2.2 --no-rdoc --no-ri # hack for collector
